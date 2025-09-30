@@ -8,6 +8,7 @@ const Styles = StyleSheet.create({
         backgroundColor: '#121212',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: 15
     },
 
 
@@ -15,13 +16,8 @@ const Styles = StyleSheet.create({
         flexDirection: "column",
         alignContent: 'center',
         justifyContent: 'center',
-        gap: 10
+        gap: 15
     },
-
-
-
-
-
 
 });
 
