@@ -1,0 +1,27 @@
+import { StyleSheet } from "react-native";
+
+const Styles = StyleSheet.create({
+
+    Container: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#121212',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+    },
+
+
+    RegisterContainer: {
+        padding: 30,
+        gap: 10,
+
+    },
+
+    TextLink: {
+        color: 'white',
+    }
+
+});
+
+export default Styles;
