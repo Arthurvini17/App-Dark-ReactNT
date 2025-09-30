@@ -13,7 +13,7 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        gap: 10
+        gap: 10,
     }
 })
 
