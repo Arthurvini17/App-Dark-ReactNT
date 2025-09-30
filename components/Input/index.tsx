@@ -10,10 +10,8 @@ export default function LogoApp({ label, secureTextEntry }: InputProps) {
         <View style={Styles.InputContainer}>
             <Text style={Styles.label}>{label}</Text>
             <TextInput style={Styles.input}
-                secureTextEntry={secureTextEntry}
-            >
+                secureTextEntry={secureTextEntry}>
             </TextInput>
         </View>
-
     );
 }

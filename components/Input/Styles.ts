@@ -3,14 +3,12 @@ import { StyleSheet } from "react-native";
 const Styles = StyleSheet.create({
 
     InputContainer: {
-        marginBottom: 40,
         marginTop: 10,
         alignSelf: 'center',
     },
 
     label: {
         color: "#fff",
-        marginBottom: 10,
     },
 
     input: {
@@ -20,8 +18,6 @@ const Styles = StyleSheet.create({
         borderRadius: 8,
         color: "#fff",
         width: 300,
-        gap: 40,
-
     },
 
 });
