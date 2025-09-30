@@ -12,12 +12,13 @@ const Styles = StyleSheet.create({
 
 
     ContainerButtons: {
-        flex: 1,
         flexDirection: "column",
         alignContent: 'center',
         justifyContent: 'center',
         gap: 10
-    }
+    },
+
+
 
 
 

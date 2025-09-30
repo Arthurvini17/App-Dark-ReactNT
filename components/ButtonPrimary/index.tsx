@@ -15,9 +15,7 @@ export default function ButtonPrimary({ title, backgroundColor, textColor, onPre
                 onPress={onPress}
                 style={[
                     Styles.Button,
-                    { backgroundColor: backgroundColor || Styles.Button.backgroundColor },
-                ]}
-            >
+                    { backgroundColor: backgroundColor || Styles.Button.backgroundColor },]}>
                 <Text style={[Styles.title, { color: textColor || Styles.title.color }]}>
                     {title}
                 </Text>

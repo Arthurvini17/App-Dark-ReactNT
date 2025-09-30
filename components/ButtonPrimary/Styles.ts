@@ -3,13 +3,11 @@ import { StyleSheet } from "react-native";
 const Styles = StyleSheet.create({
 
 
-
-
     Button: {
         backgroundColor: '#fff',
         padding: 10,
         borderRadius: 8,
-        width: 250,
+        width: 300,
     },
 
     title: {

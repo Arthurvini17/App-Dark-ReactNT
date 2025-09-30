@@ -10,7 +10,6 @@ const Styles = StyleSheet.create({
         fontSize: 30,
     },
     IconContainer: {
-        marginTop: 60,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
