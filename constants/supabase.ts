@@ -1,0 +1,3 @@
+export const supaURL = "https://idcuveqocjgfcpkubqyb.supabase.co";
+
+export const anonKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkY3V2ZXFvY2pnZmNwa3VicXliIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwMTY2MDAsImV4cCI6MjA3NTU5MjYwMH0.CJZj6r8XwU3vIhgLP41yoTlDN0VPF4UghR5Dq4c3Kng";

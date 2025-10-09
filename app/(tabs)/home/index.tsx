@@ -1,13 +1,12 @@
-import { router } from 'expo-router';
-import { Button, Text, View } from 'react-native';
-
+import { View } from 'react-native';
+import Styles from './Styles';
+import { Link } from 'expo-router';
 
 
 export default function HomeScreen() {
   return (
-    <View>
-      <Text>sla22222</Text>
-      <Button title="AuthChoice" onPress={() => router.push("/AuthChoiceScreen/AuthChoiceScreen")} />
+    <View style={Styles.Container}>
     </View>
+
   )
 }
