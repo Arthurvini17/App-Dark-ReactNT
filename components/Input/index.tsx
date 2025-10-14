@@ -1,22 +1,32 @@
-import { Text, TextInput, View } from "react-native";
+import { KeyboardTypeOptions, Text, TextInput, TextInputProps, View } from "react-native";
 import Styles from "./Styles";
 
 type InputProps = {
     label: string;
     secureTextEntry?: boolean;
-    onChageText?: (text: string) => void
+    onChangeText?: (text: string) => void
     value?: string;
+    error?: string;
+    autoCapitalize?: TextInputProps['autoCapitalize']
+    keyboardType?: KeyboardTypeOptions
 }
-export default function input({ label, secureTextEntry, onChageText, value }: InputProps) {
+export default function input({ label, secureTextEntry, onChangeText, value, error, autoCapitalize, keyboardType }: InputProps) {
     return (
         <View style={Styles.InputContainer}>
             <Text style={Styles.label}>{label}</Text>
-            <TextInput style={Styles.input}
+            <TextInput
+                style={Styles.input}
                 secureTextEntry={secureTextEntry}
-                onChangeText={onChageText}
+                onChangeText={onChangeText}
                 value={value}
-            >
-            </TextInput>
-        </View>
+                autoCapitalize={autoCapitalize}
+                keyboardType={keyboardType}
+            />
+            {error && (
+                <Text style={{ color: "red", marginTop: 4, fontSize: 12 }}>
+                    {error}
+                </Text>
+            )}
+        </View >
     );
 }

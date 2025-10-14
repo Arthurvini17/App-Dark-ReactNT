@@ -1,81 +1,157 @@
 import ButtonPrimary from "@/components/ButtonPrimary";
 import Input from "@/components/Input";
 import LogoApp from "@/components/LogoApp";
+import { supabase } from "@/lib/supabase";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from "expo-router";
 import { useState } from "react";
-import { Alert, Button, Text, View } from "react-native";
-import { supabase } from "../../../lib/supabase";
+import { Controller, useForm } from "react-hook-form";
+import {
+    Alert,
+    Button,
+    KeyboardAvoidingView,
+    Platform,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    View
+} from "react-native";
+import { signUpSchema, SignUpSchema } from "../../../schemas/SignUpSchema";
 import Styles from "./RegisterStyles";
 
 export default function RegisterScreen() {
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    async function handleSignUp() {
-        setLoading(true);
+    const { control, handleSubmit, formState: { errors } } =
+        useForm<SignUpSchema>({
 
+            resolver: zodResolver(signUpSchema),
 
-        //função de criar usuario do supabase e mandando os dados do usuario para o campo profiles
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-                data: {
-                    name: name
-                }
-            }
+            defaultValues: {
+                name: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+            },
         });
 
-        //se der erro mostrar o erro
-        if (error) {
-            Alert.alert('Error', error.message)
-            setLoading(false)
-            return;
+    const handleSignUp = async (data: SignUpSchema) => {
+        if (loading) return;
+        const { name, email, password } = data;
+
+        try {
+            setLoading(true);
+
+            const { error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: { name },
+                },
+            });
+
+            setLoading(false);
+
+            if (error) {
+                Alert.alert("Erro", error.message);
+                return;
+            }
+
+            router.replace("/(tabs)/home");
+        } catch (err: any) {
+            setLoading(false);
+            Alert.alert("Erro inesperado", err.message);
         }
-
-        //cancelar o carregamento
-        setLoading(false);
-
-        //se não der erro ir para tela home
-        router.replace("/(auth)/LoginScreen/LoginScreen");
-
-    }
+    };
 
     return (
-        <View style={Styles.Container}>
-            <View style={Styles.RegisterContainer}>
-                <LogoApp />
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+            <KeyboardAvoidingView
+                style={{ flex: 1 }}
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+            >
+                <ScrollView
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <View style={Styles.Container}>
+                        <View style={Styles.RegisterContainer}>
+                            <LogoApp />
 
+                            <Controller
+                                control={control}
+                                name="name"
+                                render={({ field: { onChange, value } }) => (
+                                    <Input
+                                        label="Username"
+                                        value={value}
+                                        onChangeText={onChange}
+                                        error={errors.name?.message}
+                                    />
+                                )}
+                            />
 
-                <Input label="Username"
-                    onChageText={setName}
-                    value={name}
-                />
-                <Input label="Email"
-                    onChageText={setEmail}
-                    value={email}
-                />
-                <Input label="Password" secureTextEntry
-                    onChageText={setPassword}
-                    value={password}
-                />
+                            <Controller
+                                control={control}
+                                name="email"
+                                render={({ field: { onChange, value } }) => (
+                                    <Input
+                                        label="Email"
+                                        value={value}
+                                        onChangeText={onChange}
+                                        autoCapitalize="none"
+                                        keyboardType="email-address"
+                                        error={errors.email?.message}
+                                    />
+                                )}
+                            />
 
+                            <Controller
+                                control={control}
+                                name="password"
+                                render={({ field: { onChange, value } }) => (
+                                    <Input
+                                        label="Password"
+                                        value={value}
+                                        onChangeText={onChange}
+                                        secureTextEntry
+                                        error={errors.password?.message}
+                                    />
+                                )}
+                            />
 
-                <ButtonPrimary
-                    backgroundColor="#3B82F6"
-                    title={loading ? 'Carregando' : 'Cadastrar'}
-                    onPress={handleSignUp}
-                />
+                            <Controller
+                                control={control}
+                                name="confirmPassword"
+                                render={({ field: { onChange, value } }) => (
+                                    <Input
+                                        label="Confirm Password"
+                                        value={value}
+                                        onChangeText={onChange}
+                                        secureTextEntry
+                                        error={errors.confirmPassword?.message}
+                                    />
+                                )}
+                            />
 
+                            <ButtonPrimary
+                                backgroundColor="#3B82F6"
+                                title={loading ? "Carregando..." : "Cadastrar"}
+                                onPress={handleSubmit(handleSignUp)}
+                            />
 
+                            <Text style={Styles.TextLink}>
+                                Ja tem uma conta? <Text style={{ textDecorationLine: "underline" }}>Login</Text>
+                            </Text>
+                        </View>
 
-                <Text style={Styles.TextLink}>Alredy have an account? Login</Text>
-            </View>
-
-            <Button title="Voltar" onPress={() => router.push("/AuthChoiceScreen/AuthChoiceScreen")} />
-
-        </View>
-    )
+                        <Button
+                            title="Voltar"
+                            onPress={() => router.push("/AuthChoiceScreen/AuthChoiceScreen")}
+                        />
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
+    );
 }

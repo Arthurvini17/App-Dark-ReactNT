@@ -8,6 +8,7 @@ const Styles = StyleSheet.create({
     },
 
     label: {
+        marginBottom: 10,
         color: "#fff",
     },
 

@@ -1,7 +1,6 @@
 import ButtonPrimary from "@/components/ButtonPrimary";
 import LogoApp from "@/components/LogoApp";
 import { router } from "expo-router";
-import { useState } from "react";
 import { View } from "react-native";
 import Styles from "./AuthChoiceStyles";
 
