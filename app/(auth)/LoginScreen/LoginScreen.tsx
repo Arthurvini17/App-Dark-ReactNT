@@ -1,15 +1,15 @@
 import ButtonPrimary from "@/components/ButtonPrimary";
 import Input from "@/components/Input";
 import LogoApp from "@/components/LogoApp";
-import { supabase } from "@/lib/supabase"; // 👈 ajuste o caminho conforme seu projeto
+import { supabase } from "@/lib/supabase";
 import { Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Alert, Text, View } from "react-native";
-import Styles from "./LoginStyles";
 import { signInSchema, SignInSchema } from "../../../schemas/SignInSchema";
+import Styles from "./LoginStyles";
 
 
 export default function LoginScreen() {
